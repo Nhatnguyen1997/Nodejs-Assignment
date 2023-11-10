@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- Latest compiled and minified CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    form {
+      width: 50%;
+      margin: 20px auto;
+      box-shadow: 0 0 2px;
+      border-radius: 10px;
+      padding: 20px;
+      background-color: antiquewhite;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="form">
+      <h1 class="pagination justify-content-center">Đăng ký</h1>
+
+      <form action="login" id="edit-form">
+        <div class="mb-3 mt-3">
+          <label for="email" class="form-label">Email:</label>
+          <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+        </div>
+        <div class="mb-3">
+          <label for="pwd" class="form-label">Password:</label>
+          <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
+        </div>
+        <!-- <div class="mb-3">
+          <label for="pwd" class="form-label">nhập lại password:</label>
+          <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
+        </div> -->
+        <div class="navbar navbar-expand-sm ">
+          <a style="margin: 10px;">Bạn Đã Có Tài Khoản</a>
+          <a class="nav-link" href="/login" style="color: blue; ">Đăng Nhập</a>
+        </div>
+        <button type="submit" class="btn btn-primary">Đăng Ký</button>
+      </form>
+    </div>
+  </div>
+  <script>
+    try {
+      const editForm = document.getElementById("edit-form");
+
+      editForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        //bắt sự kiện khi click đăng ký
+        fetch("/register/user", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: document.getElementById("email").value,
+              pass: document.getElementById("pwd").value,
+            }),
+          })
+            .then((response) => {
+              console.log(response);
+            })
+            .then((data) => {
+              console.log(data);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+      });
+
+    } catch (error) {
+
+    }
+  </script>
+</body>
+
+</html>
